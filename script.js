@@ -35,18 +35,29 @@ function winRound(playerSelection, computerSelection){
 }
 
 function playRound(userChoice, computerChoice){
+
+    let resultPar = document.querySelector('.result-par');
+
     if(winRound(userChoice, computerChoice) === true){
         roundsPlayed++;
         userWins++;
+        //document.querySelector('user-choice').textContent
+        resultPar.textContent = "You win! " + userChoice + " beats " + computerChoice + "";
+
         console.log("You win! " + userChoice + " beats " + computerChoice + "");
     }
     else if(winRound(userChoice, computerChoice) === false){
         roundsPlayed++;
         userLosses++;
+
+        resultPar.textContent = "You lose! " + computerChoice + " beats " + userChoice + "";
+
         console.log("You lose! " + computerChoice + " beats " + userChoice + "");
     }
     else{
-    
+        resultPar.textContent = "It's a tie!";
+
+        console.log("It's a tie!");
     }
         
 }
