@@ -17,11 +17,14 @@ let paperbtn = document.querySelector('.paper-btn');
 let scissorsbtn = document.querySelector('.scissors-btn');
 
 function getUserChoice(userChoice){
+    document.querySelector('.user-choice').textContent = userChoice;
     return userChoice;
 }
 
 function getComputerChoice(){
-    return Math.floor((Math.random() * 3) + 1);
+    let randomChoice = Math.floor((Math.random() * 3) + 1);
+    document.querySelector('.computer-choice').textContent = randomChoice;
+    return randomChoice;
 }
 
 function winRound(playerSelection, computerSelection){
@@ -34,31 +37,37 @@ function winRound(playerSelection, computerSelection){
 
 }
 
-function playRound(userChoice, computerChoice){
+function playGame(userChoice, computerChoice){
 
     let resultPar = document.querySelector('.result-par');
+    let currRound = document.querySelector('.curr-round');
 
-    if(winRound(userChoice, computerChoice) === true){
-        roundsPlayed++;
-        userWins++;
-        //document.querySelector('user-choice').textContent
-        resultPar.textContent = "You win! " + userChoice + " beats " + computerChoice + "";
+    if(roundsPlayed != 5){
+        if(winRound(userChoice, computerChoice) === true){
+            roundsPlayed++;
+            userWins++;
+            //document.querySelector('user-choice').textContent
+            resultPar.textContent = "You win! " + userChoice + " beats " + computerChoice + "";
+            currRound.textContent = roundsPlayed + " rounds out of 5 played";
 
-        console.log("You win! " + userChoice + " beats " + computerChoice + "");
-    }
-    else if(winRound(userChoice, computerChoice) === false){
-        roundsPlayed++;
-        userLosses++;
+        }
+        else if(winRound(userChoice, computerChoice) === false){
+            roundsPlayed++;
+            userLosses++;
 
-        resultPar.textContent = "You lose! " + computerChoice + " beats " + userChoice + "";
+            resultPar.textContent = "You lose! " + computerChoice + " beats " + userChoice + "";
+            currRound.textContent = roundsPlayed + " rounds out of 5 played";
+        }
+        else{
+            resultPar.textContent = "It's a tie!";
 
-        console.log("You lose! " + computerChoice + " beats " + userChoice + "");
+        }
     }
     else{
-        resultPar.textContent = "It's a tie!";
-
-        console.log("It's a tie!");
+        alert("Game over!");
     }
+    
+
         
 }
 
@@ -67,26 +76,19 @@ rockbtn.addEventListener('click', function() {
     let userChoice = getUserChoice(1);
     let computerChoice = getComputerChoice();
     
-    playRound(userChoice, computerChoice);
+    playGame(userChoice, computerChoice);
 });
 
 paperbtn.addEventListener('click', function() {
     let userChoice = getUserChoice(2);
     let computerChoice = getComputerChoice();
     
-    playRound(userChoice, computerChoice);
+    playGame(userChoice, computerChoice);
 });
 
 scissorsbtn.addEventListener('click', function() {
     let userChoice = getUserChoice(3);
     let computerChoice = getComputerChoice();
 
-    playRound(userChoice, computerChoice);
+    playGame(userChoice, computerChoice);
 });
-
-/*
-
-function game(){
-
-}
-*/
